@@ -871,12 +871,31 @@ document.addEventListener('keydown', e => {
     });
     scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
     resize(); window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', e => uniforms.mouse.value.set((e.clientX/window.innerWidth-0.5)*2, -(e.clientY/window.innerHeight-0.5)*2), {passive:true});
+    // parallax target: mouse on desktop, device tilt on mobile (smoothed in the loop)
+    const target = { x:0, y:0 };
+    window.addEventListener('mousemove', e => { target.x=(e.clientX/window.innerWidth-0.5)*2; target.y=-(e.clientY/window.innerHeight-0.5)*2; }, {passive:true});
+    let baseBeta=null;
+    function onTilt(e){
+      if(e.gamma==null && e.beta==null) return;
+      if(baseBeta===null) baseBeta = e.beta||0;               // calibrate to how the phone is held
+      target.x = Math.max(-1, Math.min(1, (e.gamma||0)/35));  // left-right tilt
+      target.y = -Math.max(-1, Math.min(1, ((e.beta||0)-baseBeta)/35)); // front-back tilt
+    }
+    const DOE = window.DeviceOrientationEvent;
+    if(DOE && typeof DOE.requestPermission === 'function'){   // iOS 13+: needs a user gesture
+      const ask = () => { window.removeEventListener('touchend', ask); DOE.requestPermission().then(s=>{ if(s==='granted') window.addEventListener('deviceorientation', onTilt, {passive:true}); }).catch(()=>{}); };
+      window.addEventListener('touchend', ask, {passive:true});
+    } else if(DOE){                                           // Android / others
+      window.addEventListener('deviceorientation', onTilt, {passive:true});
+    }
     let cur=0;
     function advance(){ const next=(cur+1)%IMAGES.length; if(!textures[next]){ setTimeout(advance,800); return; } uniforms.t1.value=textures[cur]; uniforms.t2.value=textures[next]; uniforms.img1.value=imgRes(textures[cur]); uniforms.img2.value=imgRes(textures[next]); uniforms.prog.value=0; if(HAS_GSAP) gsap.to(uniforms.prog,{value:1,duration:1.8,ease:'power2.inOut',onComplete:()=>{cur=next;}}); else { uniforms.prog.value=1; cur=next; } }
     setInterval(advance, 5200);
     const clock=new THREE.Clock();
-    (function loop(){ requestAnimationFrame(loop); uniforms.time.value=clock.getElapsedTime()*0.4; renderer.render(scene,camera); })();
+    (function loop(){ requestAnimationFrame(loop);
+      uniforms.mouse.value.x += (target.x - uniforms.mouse.value.x)*0.06;
+      uniforms.mouse.value.y += (target.y - uniforms.mouse.value.y)*0.06;
+      uniforms.time.value=clock.getElapsedTime()*0.4; renderer.render(scene,camera); })();
   }
   function resize(){ const w=heroEl.clientWidth,h=heroEl.clientHeight; renderer.setSize(w,h,false); if(uniforms) uniforms.res.value.set(w*renderer.getPixelRatio(), h*renderer.getPixelRatio()); }
 })();
