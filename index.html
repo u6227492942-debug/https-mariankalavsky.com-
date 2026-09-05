@@ -861,13 +861,13 @@ document.addEventListener('keydown', e => {
   function imgRes(t){ const im=t.image; return new THREE.Vector2(im.width||1600, im.height||1000); }
   function init(){
     started = true; heroEl.classList.add('webgl');
-    uniforms = { t1:{value:textures[0]}, t2:{value:textures[1]}, res:{value:new THREE.Vector2(1,1)}, img1:{value:imgRes(textures[0])}, img2:{value:imgRes(textures[1])}, prog:{value:0}, time:{value:0}, mouse:{value:new THREE.Vector2(0,0)} };
+    uniforms = { t1:{value:textures[0]}, t2:{value:textures[1]}, res:{value:new THREE.Vector2(1,1)}, img1:{value:imgRes(textures[0])}, img2:{value:imgRes(textures[1])}, prog:{value:0}, time:{value:0}, mouse:{value:new THREE.Vector2(0,0)}, overscan:{value:1.0} };
     const mat = new THREE.ShaderMaterial({ uniforms,
       vertexShader:'varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position,1.0); }',
-      fragmentShader:`precision highp float; varying vec2 vUv; uniform sampler2D t1; uniform sampler2D t2; uniform vec2 res; uniform vec2 img1; uniform vec2 img2; uniform float prog; uniform float time; uniform vec2 mouse;
-        vec2 cover(vec2 uv, vec2 imgR){ vec2 s=res/imgR; float sc=max(s.x,s.y); vec2 size=imgR*sc; vec2 off=(res-size)*0.5; vec2 iuv=(uv*res-off)/size; return (iuv-0.5)*0.88+0.5; }
+      fragmentShader:`precision highp float; varying vec2 vUv; uniform sampler2D t1; uniform sampler2D t2; uniform vec2 res; uniform vec2 img1; uniform vec2 img2; uniform float prog; uniform float time; uniform vec2 mouse; uniform float overscan;
+        vec2 cover(vec2 uv, vec2 imgR){ vec2 s=res/imgR; float sc=max(s.x,s.y); vec2 size=imgR*sc; vec2 off=(res-size)*0.5; vec2 iuv=(uv*res-off)/size; return (iuv-0.5)*overscan+0.5; }
         float hash(vec2 p){ return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453); }
-        void main(){ vec2 par=mouse*0.035; float d=0.05*sin(prog*3.14159); vec2 uv1=cover(vUv+par,img1)+vec2(d*prog); vec2 uv2=cover(vUv+par,img2)-vec2(d*(1.0-prog)); vec3 c1=texture2D(t1,uv1).rgb; vec3 c2=texture2D(t2,uv2).rgb; float p=smoothstep(0.0,1.0,prog); vec3 col=mix(c1,c2,p); float l=dot(col,vec3(0.299,0.587,0.114)); col=mix(col,vec3(l),0.10); col*=0.96; col+=(hash(vUv*res.xy*0.5+time)-0.5)*0.035; vec2 q=vUv-0.5; col*=1.0-dot(q,q)*0.5; gl_FragColor=vec4(col,1.0); }`
+        void main(){ vec2 par=mouse*0.012; float d=0.05*sin(prog*3.14159); vec2 uv1=cover(vUv+par,img1)+vec2(d*prog); vec2 uv2=cover(vUv+par,img2)-vec2(d*(1.0-prog)); vec3 c1=texture2D(t1,uv1).rgb; vec3 c2=texture2D(t2,uv2).rgb; float p=smoothstep(0.0,1.0,prog); vec3 col=mix(c1,c2,p); float l=dot(col,vec3(0.299,0.587,0.114)); col=mix(col,vec3(l),0.10); col*=0.96; col+=(hash(vUv*res.xy*0.5+time)-0.5)*0.035; vec2 q=vUv-0.5; col*=1.0-dot(q,q)*0.5; gl_FragColor=vec4(col,1.0); }`
     });
     scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
     resize(); window.addEventListener('resize', resize);
@@ -877,9 +877,10 @@ document.addEventListener('keydown', e => {
     let baseBeta=null;
     function onTilt(e){
       if(e.gamma==null && e.beta==null) return;
-      if(baseBeta===null) baseBeta = e.beta||0;               // calibrate to how the phone is held
-      target.x = Math.max(-1, Math.min(1, (e.gamma||0)/20));  // left-right tilt (more sensitive)
-      target.y = -Math.max(-1, Math.min(1, ((e.beta||0)-baseBeta)/20)); // front-back tilt
+      if(baseBeta===null){ baseBeta = e.beta||0; uniforms.overscan.value = 0.88; } // calibrate + enable pan room only on tilt
+      const amp = 3.0;                                        // tilt-only boost (desktop mouse stays as before)
+      target.x = amp*Math.max(-1, Math.min(1, (e.gamma||0)/20));  // left-right tilt
+      target.y = -amp*Math.max(-1, Math.min(1, ((e.beta||0)-baseBeta)/20)); // front-back tilt
     }
     const DOE = window.DeviceOrientationEvent;
     if(DOE && typeof DOE.requestPermission === 'function'){   // iOS 13+: needs a user gesture
