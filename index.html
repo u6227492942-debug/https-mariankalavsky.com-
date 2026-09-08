@@ -614,32 +614,32 @@ body.classList.remove('no-js');
 
 /* ---------- CONTENT TREE ---------- */
 const ROOT = [
-  {label:{sk:'Fotky',en:'Photography'}, children:[
-    {label:{sk:'Digital',en:'Digital'}, leaf:'fotky-digital'},
-    {label:{sk:'Analóg',en:'Analog'}, children:[
-      {label:{sk:'Farba',en:'Colour'}, leaf:'fotky-analog-color'},
-      {label:{sk:'Čiernobiela',en:'Black & White'}, leaf:'fotky-analog-bw'},
+  {slug:'fotky', label:{sk:'Fotky',en:'Photography'}, children:[
+    {slug:'digital', label:{sk:'Digital',en:'Digital'}, leaf:'fotky-digital'},
+    {slug:'analog', label:{sk:'Analóg',en:'Analog'}, children:[
+      {slug:'farba', label:{sk:'Farba',en:'Colour'}, leaf:'fotky-analog-color'},
+      {slug:'ciernobiela', label:{sk:'Čiernobiela',en:'Black & White'}, leaf:'fotky-analog-bw'},
     ]},
   ]},
-  {label:{sk:'Video',en:'Video'}, children:[
-    {label:{sk:'Klipy',en:'Clips'}, leaf:'video-klip'},
-    {label:{sk:'Performance',en:'Performance'}, leaf:'video-performance'},
-    {label:{sk:'Video art',en:'Video Art'}, children:[
-      {label:{sk:'ABC OCD',en:'ABC OCD'}, leaf:'video-art-abc'},
-      {label:{sk:'Sex sells',en:'Sex sells'}, leaf:'video-art-sex'},
-      {label:{sk:'MRVENIE',en:'MRVENIE'}, leaf:'video-art-mrvenie'},
+  {slug:'video', label:{sk:'Video',en:'Video'}, children:[
+    {slug:'klipy', label:{sk:'Klipy',en:'Clips'}, leaf:'video-klip'},
+    {slug:'performance', label:{sk:'Performance',en:'Performance'}, leaf:'video-performance'},
+    {slug:'video-art', label:{sk:'Video art',en:'Video Art'}, children:[
+      {slug:'abc-ocd', label:{sk:'ABC OCD',en:'ABC OCD'}, leaf:'video-art-abc'},
+      {slug:'sex-sells', label:{sk:'Sex sells',en:'Sex sells'}, leaf:'video-art-sex'},
+      {slug:'mrvenie', label:{sk:'MRVENIE',en:'MRVENIE'}, leaf:'video-art-mrvenie'},
     ]},
-    {label:{sk:'Vlog',en:'Vlog'}, leaf:'video-vlog'},
+    {slug:'vlog', label:{sk:'Vlog',en:'Vlog'}, leaf:'video-vlog'},
   ]},
-  {label:{sk:'Socha',en:'Sculpture'}, children:[
-    {label:{sk:'Ťah na svoju stranu',en:'Ťah na svoju stranu'}, leaf:'socha-tah'},
-    {label:{sk:'Pery',en:'Pery'}, leaf:'socha-pery'},
+  {slug:'socha', label:{sk:'Socha',en:'Sculpture'}, children:[
+    {slug:'tah', label:{sk:'Ťah na svoju stranu',en:'Ťah na svoju stranu'}, leaf:'socha-tah'},
+    {slug:'pery', label:{sk:'Pery',en:'Pery'}, leaf:'socha-pery'},
   ]},
-  {label:{sk:'Grafika',en:'Graphics'}, leaf:'graficky'},
-  {label:{sk:'Obrazy',en:'Paintings'}, leaf:'obrazy'},
-  {label:{sk:'Odev',en:'Apparel'}, leaf:'odev'},
-  {label:{sk:'Weby',en:'Websites'}, leaf:'weby'},
-  {label:{sk:'Kontakt',en:'Contact'}, leaf:'kontakt'},
+  {slug:'grafika', label:{sk:'Grafika',en:'Graphics'}, leaf:'graficky'},
+  {slug:'obrazy', label:{sk:'Obrazy',en:'Paintings'}, leaf:'obrazy'},
+  {slug:'odev', label:{sk:'Odev',en:'Apparel'}, leaf:'odev'},
+  {slug:'weby', label:{sk:'Weby',en:'Websites'}, leaf:'weby'},
+  {slug:'kontakt', label:{sk:'Kontakt',en:'Contact'}, leaf:'kontakt'},
 ];
 
 const stage    = document.getElementById('stage');
@@ -721,16 +721,35 @@ function showLeaf(node, path){
   else { titleEl.textContent = L(node); titleEl.classList.add('show'); }
   openStage(); animateLeaf(el);
 }
-function open(node, ancestors){
-  if(node.leaf) showLeaf(node, ancestors.concat(node));
-  else showChooser(node, ancestors);
+/* ---------- hash routing: every view has its own shareable URL (e.g. #video/performance) ---------- */
+function slugPath(path){ return path.map(n => n.slug).join('/'); }
+function findBySlugs(slugs){
+  let level = ROOT, ancestors = [], node = null;
+  for(let i=0;i<slugs.length;i++){
+    node = (level||[]).find(n => n.slug === slugs[i]);
+    if(!node) return null;
+    if(i < slugs.length-1){ if(!node.children) return null; ancestors.push(node); level = node.children; }
+  }
+  return node ? { node, ancestors } : null;
 }
+function applyRoute(){
+  const slugs = (location.hash||'').replace(/^#\/?/, '').split('/').filter(Boolean);
+  if(!slugs.length){ closeStage(); return; }
+  const f = findBySlugs(slugs);
+  if(!f){ closeStage(); return; }
+  if(f.node.leaf) showLeaf(f.node, f.ancestors.concat(f.node));
+  else showChooser(f.node, f.ancestors);
+}
+// navigation just changes the URL; applyRoute (on hashchange) renders the view
+function open(node, ancestors){ location.hash = '#' + slugPath(ancestors.concat(node)); }
+function goHome(){ if(location.hash) history.replaceState(null, '', location.pathname + location.search); closeStage(); }
 function goBack(){
   const p = view.path;
-  if(p.length <= 1){ closeStage(); return; }
-  showChooser(p[p.length-2], p.slice(0, -2));
+  if(p.length <= 1){ goHome(); return; }
+  location.hash = '#' + slugPath(p.slice(0, -1));
 }
 backBtn.addEventListener('click', goBack);
+window.addEventListener('hashchange', applyRoute);
 
 /* Entrance is handled reliably by the #stage pane's own CSS fade (see .stage-open).
    Per-item GSAP reveals were dropped: the WebGL hero starves GSAP's ticker on load,
@@ -755,6 +774,7 @@ function buildNavOverlay(){
 }
 buildNavOverlay();
 layoutAllWalls();
+applyRoute();   // open the view named in the URL on load (deep links)
 
 /* ---------- LANGUAGE ---------- */
 (function(){
@@ -782,7 +802,7 @@ function closeNav(){ body.classList.remove('nav-open'); if(!body.classList.conta
 function openNav(){ body.classList.add('nav-open','chrome-light'); burger.setAttribute('aria-expanded','true'); }
 burger.addEventListener('click', () => { body.classList.contains('nav-open') ? closeNav() : openNav(); });
 scrim.addEventListener('click', closeNav);
-document.querySelector('.wordmark').addEventListener('click', e => { e.preventDefault(); closeNav(); closeStage(); });
+document.querySelector('.wordmark').addEventListener('click', e => { e.preventDefault(); closeNav(); goHome(); });
 
 /* ---------- LIGHTBOX (gallery layout + stepped zoom) ---------- */
 const lb = document.getElementById('lightbox');
@@ -841,7 +861,7 @@ document.addEventListener('keydown', e => {
   }
   if(e.key !== 'Escape') return;
   if(body.classList.contains('nav-open')) closeNav();
-  else if(body.classList.contains('stage-open')) closeStage();
+  else if(body.classList.contains('stage-open')) goHome();
 });
 
 /* ---------- THREE.JS AMBIENT HERO ---------- */
