@@ -221,6 +221,7 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 .lb-meta{display:flex;flex-direction:column;gap:3px;line-height:1.25;}
 .lb-author{font-size:12px;letter-spacing:.04em;color:rgba(255,255,255,.5);}
 .lb-cat{font-size:clamp(14px,1.2vw,16px);font-weight:600;letter-spacing:.01em;}
+.lb-tech{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9fb6d8;margin-top:3px;}
 .lb-link{pointer-events:auto;background:none;border:none;color:rgba(255,255,255,.58);font-family:var(--font);font-size:13px;letter-spacing:.05em;cursor:pointer;transition:color .3s var(--ease);padding:4px 2px;}
 .lb-link:hover{color:#fff;}
 .lb-count{font-size:13px;font-weight:600;color:#fff;letter-spacing:.1em;}
@@ -325,91 +326,140 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 
   <div id="stage-nav"><ul class="cat-list" id="cat-list"></ul></div>
 
-  <!-- Fotky / Digital -->
-  <section class="leaf" id="fotky-digital"><div class="wall">
-    <figure><img src="assets/images/mlaka.jpg" alt="mlaka" loading="lazy"></figure>
-    <figure><img src="assets/images/huliwow.jpg" alt="huli" loading="lazy"></figure>
-    <figure><img src="assets/images/huliedit.jpg" alt="huli edit" loading="lazy"></figure>
-    <figure><img src="assets/images/vyklad.jpg" alt="výklad" loading="lazy"></figure>
-    <figure><img src="assets/images/foto-syntéza.jpg" alt="foto-syntéza" loading="lazy"></figure>
-    <figure><img src="assets/images/hviezdy.jpg" alt="hviezdy" loading="lazy"></figure>
-    <figure><img src="assets/images/relax.jpg" alt="relax" loading="lazy"></figure>
-    <figure><img src="assets/images/derealizácia.jpg" alt="derealizácia" loading="lazy"></figure>
-    <figure><img src="assets/images/prilis vela ruk na objatie.jpg" alt="priveľa rúk na objatie" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0086.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0097.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0121.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0297.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0359.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0450.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0535.jpg" alt="foto" loading="lazy"></figure>
-    <figure><img src="assets/images/DSC_0541.jpg" alt="foto" loading="lazy"></figure>
+  <!-- Fotky / Ľudia -->
+  <section class="leaf" id="fotky-ludia"><div class="wall">
+    <figure><img src="assets/images/fotky/ludia/Andrej.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/DSC_0086.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/ludia/DSC_0097.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/ludia/DSC_0121.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/ludia/DSC_0297.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/ludia/GIRL.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/Karla.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/T a G.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/Téčko.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/adam.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/adam2.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/aktivistka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/almasy.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/baba v rauši.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/baba.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/baren.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/barenP.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/bighorse.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/budka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/goth.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/grydo.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/hanka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/hora.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/jakub a jeho nekonečné vedomie.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/joy.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/kodiki.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/kvlt.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/kvltFM.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/lauripin.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/linda.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/luca.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/melinda a ziska.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/melinda.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/miery.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/miso.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/neznámy maliar.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/oberač.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/pani.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/pierce.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/plaza.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/police.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/pusa.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/red.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/rollin.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/shimmi.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/standa.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/vercetti.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/veroveru.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/vm.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/vrillton.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/zayo.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/ziska.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/zuzka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ludia/šajmo.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
   </div></section>
 
-  <!-- Fotky / Analóg / Farba -->
-  <section class="leaf" id="fotky-analog-color"><div class="wall">
-    <figure><img src="assets/images/jakub a jeho nekonečné vedomie.jpg" alt="jakub" loading="lazy"></figure>
-    <figure><img src="assets/images/Líščia Maringotka.jpg" alt="Líščia Maringotka" loading="lazy"></figure>
-    <figure><img src="assets/images/plaza.jpg" alt="pláž" loading="lazy"></figure>
-    <figure><img src="assets/images/hora.jpg" alt="hora" loading="lazy"></figure>
-    <figure><img src="assets/images/kos.jpg" alt="kôš" loading="lazy"></figure>
-    <figure><img src="assets/images/kvlt.jpg" alt="kvlt" loading="lazy"></figure>
-    <figure><img src="assets/images/adam.jpg" alt="adam" loading="lazy"></figure>
-    <figure><img src="assets/images/adam2.jpg" alt="adam II" loading="lazy"></figure>
-    <figure><img src="assets/images/melinda a ziska.jpg" alt="melinda a žiška" loading="lazy"></figure>
-    <figure><img src="assets/images/melinda.jpg" alt="melinda" loading="lazy"></figure>
-    <figure><img src="assets/images/Andrej.jpg" alt="Andrej" loading="lazy"></figure>
-    <figure><img src="assets/images/farma.jpg" alt="farma" loading="lazy"></figure>
-    <figure><img src="assets/images/budka.jpg" alt="búdka" loading="lazy"></figure>
-    <figure><img src="assets/images/linda.jpg" alt="linda" loading="lazy"></figure>
-    <figure><img src="assets/images/vrillton.jpg" alt="vrillton" loading="lazy"></figure>
-    <figure><img src="assets/images/ziska.jpg" alt="žiška" loading="lazy"></figure>
-    <figure><img src="assets/images/cmiter.jpg" alt="cmiter" loading="lazy"></figure>
-    <figure><img src="assets/images/miso.jpg" alt="mišo" loading="lazy"></figure>
-    <figure><img src="assets/images/shimmi.jpg" alt="shimmi" loading="lazy"></figure>
-    <figure><img src="assets/images/zayo.jpg" alt="zayo" loading="lazy"></figure>
-    <figure><img src="assets/images/luca.jpg" alt="luca" loading="lazy"></figure>
-    <figure><img src="assets/images/vercetti.jpg" alt="vercetti" loading="lazy"></figure>
-    <figure><img src="assets/images/dvor.jpg" alt="dvor" loading="lazy"></figure>
-    <figure><img src="assets/images/zuzka.jpg" alt="zuzka" loading="lazy"></figure>
-    <figure><img src="assets/images/red.jpg" alt="red" loading="lazy"></figure>
+  <!-- Fotky / Reportáž / House of Kondor -->
+  <section class="leaf" id="fotky-house-of-kondor"><div class="wall">
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_0920.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_0954.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_0957.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1089.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1093.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1097.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1099.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1123.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1144.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1152.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1159.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1179.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1181.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1182.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1183.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1207.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1219.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1234.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1256.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1294.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1297.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1307.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1327.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1330.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1339.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1358.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1372.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1417.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1422.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1424.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1429.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1433.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/reportaz/house-of-kondor/DSC_1498.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
   </div></section>
 
-  <!-- Fotky / Analóg / ČB -->
-  <section class="leaf" id="fotky-analog-bw"><div class="wall">
-    <figure><img src="assets/images/šajmo.jpg" alt="šajmo" loading="lazy"></figure>
-    <figure><img src="assets/images/lauripin.jpg" alt="lauripin" loading="lazy"></figure>
-    <figure><img src="assets/images/grydo.jpg" alt="grydo" loading="lazy"></figure>
-    <figure><img src="assets/images/bighorse.jpg" alt="bighorse" loading="lazy"></figure>
-    <figure><img src="assets/images/Téčko.jpg" alt="Téčko" loading="lazy"></figure>
-    <figure><img src="assets/images/T a G.jpg" alt="T a G" loading="lazy"></figure>
-    <figure><img src="assets/images/baba.jpg" alt="baba" loading="lazy"></figure>
-    <figure><img src="assets/images/baba v rauši.jpg" alt="baba v rauši" loading="lazy"></figure>
-    <figure><img src="assets/images/vm.jpg" alt="vm" loading="lazy"></figure>
-    <figure><img src="assets/images/pani.jpg" alt="pani" loading="lazy"></figure>
-    <figure><img src="assets/images/pierce.jpg" alt="pierce" loading="lazy"></figure>
-    <figure><img src="assets/images/kvltFM.jpg" alt="kvltFM" loading="lazy"></figure>
-    <figure><img src="assets/images/jazero.jpg" alt="jazero" loading="lazy"></figure>
-    <figure><img src="assets/images/rybárka.jpg" alt="rybárka" loading="lazy"></figure>
-    <figure><img src="assets/images/almasy.jpg" alt="almásy" loading="lazy"></figure>
-    <figure><img src="assets/images/Karla.jpg" alt="Karla" loading="lazy"></figure>
-    <figure><img src="assets/images/oberač.jpg" alt="oberač" loading="lazy"></figure>
-    <figure><img src="assets/images/aktivistka.jpg" alt="aktivistka" loading="lazy"></figure>
-    <figure><img src="assets/images/standa.jpg" alt="štanda" loading="lazy"></figure>
-    <figure><img src="assets/images/joy.jpg" alt="joy" loading="lazy"></figure>
-    <figure><img src="assets/images/neznámy maliar.jpg" alt="neznámy maliar" loading="lazy"></figure>
-    <figure><img src="assets/images/miery.jpg" alt="miery" loading="lazy"></figure>
-    <figure><img src="assets/images/veroveru.jpg" alt="veroveru" loading="lazy"></figure>
-    <figure><img src="assets/images/police.jpg" alt="police" loading="lazy"></figure>
-    <figure><img src="assets/images/hanka.jpg" alt="hanka" loading="lazy"></figure>
-    <figure><img src="assets/images/baren.jpg" alt="baren" loading="lazy"></figure>
-    <figure><img src="assets/images/barenP.jpg" alt="baren P" loading="lazy"></figure>
-    <figure><img src="assets/images/GIRL.jpg" alt="GIRL" loading="lazy"></figure>
-    <figure><img src="assets/images/goth.jpg" alt="goth" loading="lazy"></figure>
-    <figure><img src="assets/images/pusa.jpg" alt="pusa" loading="lazy"></figure>
-    <figure><img src="assets/images/POLIZEI.jpg" alt="POLIZEI" loading="lazy"></figure>
-    <figure><img src="assets/images/rollin.jpg" alt="rollin" loading="lazy"></figure>
-    <figure><img src="assets/images/kodiki.jpg" alt="kodiki" loading="lazy"></figure>
+  <!-- Fotky / Nočná obloha -->
+  <section class="leaf" id="fotky-nocna-obloha"><div class="wall">
+    <figure><img src="assets/images/fotky/nocna-obloha/DSC_0535.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/nocna-obloha/DSC_0541.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/nocna-obloha/huliedit.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/nocna-obloha/hviezdy.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+  </div></section>
+
+  <!-- Fotky / Experimenty -->
+  <section class="leaf" id="fotky-experimenty"><div class="wall">
+    <figure><img src="assets/images/fotky/experimenty/derealizácia.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/experimenty/foto-syntéza.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/experimenty/prilis vela ruk na objatie.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/experimenty/relax.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+  </div></section>
+
+  <!-- Fotky / Krajiny -->
+  <section class="leaf" id="fotky-krajiny"><div class="wall">
+    <figure><img src="assets/images/fotky/krajiny/Líščia Maringotka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/krajiny/cmiter.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/krajiny/dvor.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/krajiny/farma.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/krajiny/huliwow.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/krajiny/jazero.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/krajiny/rybárka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+  </div></section>
+
+  <!-- Fotky / Zvieratá -->
+  <section class="leaf" id="fotky-zvierata"><div class="wall">
+    <figure><img src="assets/images/fotky/zvierata/DSC_0359.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/zvierata/DSC_0450.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+  </div></section>
+
+  <!-- Fotky / Ostatné -->
+  <section class="leaf" id="fotky-ostatne"><div class="wall">
+    <figure><img src="assets/images/fotky/ostatne/POLIZEI.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ostatne/kos.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
+    <figure><img src="assets/images/fotky/ostatne/mlaka.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
+    <figure><img src="assets/images/fotky/ostatne/vyklad.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
   </div></section>
 
   <!-- Video / Klipy -->
@@ -589,7 +639,7 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 <!-- LIGHTBOX -->
 <div id="lightbox" aria-hidden="true">
   <div class="lb-bar lb-top">
-    <div class="lb-meta"><span class="lb-author">Marián Kaľavský</span><span class="lb-cat" id="lb-cat"></span></div>
+    <div class="lb-meta"><span class="lb-author">Marián Kaľavský</span><span class="lb-cat" id="lb-cat"></span><span class="lb-tech" id="lb-tech"></span></div>
     <button id="lb-close" class="lb-link"><span class="sk">Zavrieť</span><span class="en">Close</span></button>
   </div>
   <img id="lb-img" alt="">
@@ -615,20 +665,24 @@ body.classList.remove('no-js');
 /* ---------- CONTENT TREE ---------- */
 const ROOT = [
   {slug:'fotky', label:{sk:'Fotky',en:'Photography'}, children:[
-    {slug:'digital', label:{sk:'Digital',en:'Digital'}, leaf:'fotky-digital'},
-    {slug:'analog', label:{sk:'Analóg',en:'Analog'}, children:[
-      {slug:'farba', label:{sk:'Farba',en:'Colour'}, leaf:'fotky-analog-color'},
-      {slug:'ciernobiela', label:{sk:'Čiernobiela',en:'Black & White'}, leaf:'fotky-analog-bw'},
+    {slug:'ludia', label:{sk:'Ľudia',en:'People'}, leaf:'fotky-ludia'},
+    {slug:'reportaz', label:{sk:'Reportáž',en:'Reportage'}, children:[
+      {slug:'house-of-kondor', label:{sk:'House of Kondor',en:'House of Kondor'}, leaf:'fotky-house-of-kondor'}
     ]},
+    {slug:'nocna-obloha', label:{sk:'Nočná obloha',en:'Night Sky'}, leaf:'fotky-nocna-obloha'},
+    {slug:'experimenty', label:{sk:'Experimenty',en:'Experiments'}, leaf:'fotky-experimenty'},
+    {slug:'krajiny', label:{sk:'Krajiny',en:'Landscapes'}, leaf:'fotky-krajiny'},
+    {slug:'zvierata', label:{sk:'Zvieratá',en:'Animals'}, leaf:'fotky-zvierata'},
+    {slug:'ostatne', label:{sk:'Ostatné',en:'Other'}, leaf:'fotky-ostatne'}
   ]},
   {slug:'video', label:{sk:'Video',en:'Video'}, children:[
-    {slug:'klipy', label:{sk:'Klipy',en:'Clips'}, leaf:'video-klip'},
-    {slug:'performance', label:{sk:'Performance',en:'Performance'}, leaf:'video-performance'},
-    {slug:'video-art', label:{sk:'Video art',en:'Video Art'}, children:[
+    {slug:'videoart', label:{sk:'Videoart',en:'Video Art'}, children:[
+      {slug:'zaplata', label:{sk:'Záplata',en:'Záplata'}, leaf:'video-performance'},
+      {slug:'mrvenie', label:{sk:'MRVENIE',en:'MRVENIE'}, leaf:'video-art-mrvenie'},
       {slug:'abc-ocd', label:{sk:'ABC OCD',en:'ABC OCD'}, leaf:'video-art-abc'},
       {slug:'sex-sells', label:{sk:'Sex sells',en:'Sex sells'}, leaf:'video-art-sex'},
-      {slug:'mrvenie', label:{sk:'MRVENIE',en:'MRVENIE'}, leaf:'video-art-mrvenie'},
     ]},
+    {slug:'klipy', label:{sk:'Klipy',en:'Clips'}, leaf:'video-klip'},
     {slug:'vlog', label:{sk:'Vlog',en:'Vlog'}, leaf:'video-vlog'},
   ]},
   {slug:'socha', label:{sk:'Socha',en:'Sculpture'}, children:[
@@ -808,6 +862,7 @@ document.querySelector('.wordmark').addEventListener('click', e => { e.preventDe
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
 const lbCat = document.getElementById('lb-cat');
+const lbTech = document.getElementById('lb-tech');
 const lbCount = document.getElementById('lb-count');
 const ZOOMS = [1, 1.8, 2.8];               // click once = a bit, twice = more, thrice = reset
 let lbList = [], lbIdx = 0, lbZoom = 0;
@@ -829,6 +884,8 @@ function lbShow(){
   lbResetZoom();
   lbCount.textContent = (lbIdx+1) + ' / ' + lbList.length;
   lb.classList.toggle('has-nav', lbList.length > 1);
+  const t = img.getAttribute('data-tech');
+  lbTech.textContent = t ? (t === 'digital' ? 'digital' : (lang()==='sk' ? 'analóg' : 'analog')) : '';
 }
 function openLB(img){
   lbList = lbGalleryFor(img);
