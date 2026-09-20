@@ -308,7 +308,7 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-fallback" style="background-image:url('assets/images/derealizácia.jpg')"></div>
+  <div class="hero-fallback" style="background-image:url('assets/images/hero/derealizácia.jpg')"></div>
   <div class="hero-veil"></div>
   <div class="hero-inner">
     <div class="hero-sub"><span class="sk">Súčasný umelec · Slovensko</span><span class="en">Contemporary artist · Slovakia</span></div>
@@ -559,9 +559,9 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
   <!-- Obrazy -->
   <section class="leaf" id="obrazy"><div class="wall">
     <figure><img src="assets/images/ranný chlad.jpg" alt="ranný chlad" loading="lazy"></figure>
-    <figure><img src="assets/images/nevekosť.png" alt="nevekosť" loading="lazy"></figure>
-    <figure><img src="assets/images/neviem sa dočkať.png" alt="neviem sa dočkať" loading="lazy"></figure>
-    <figure><img src="assets/images/zniesť.png" alt="zniesť" loading="lazy"></figure>
+    <figure><img src="assets/images/nevekosť.jpg" alt="nevekosť" loading="lazy"></figure>
+    <figure><img src="assets/images/neviem sa dočkať.jpg" alt="neviem sa dočkať" loading="lazy"></figure>
+    <figure><img src="assets/images/zniesť.jpg" alt="zniesť" loading="lazy"></figure>
   </div></section>
 
   <!-- Odev -->
@@ -927,7 +927,7 @@ document.addEventListener('keydown', e => {
   const canvas = document.createElement('canvas');
   const heroEl = document.querySelector('.hero');
   heroEl.insertBefore(canvas, heroEl.querySelector('.hero-veil'));
-  const IMAGES = ['assets/images/derealizácia.jpg','assets/images/hviezdy.jpg','assets/images/jazero.jpg','assets/images/jakub a jeho nekonečné vedomie.jpg','assets/images/hanka.jpg'];
+  const IMAGES = ['assets/images/hero/derealizácia.jpg','assets/images/hero/hviezdy.jpg','assets/images/hero/jazero.jpg','assets/images/hero/jakub a jeho nekonečné vedomie.jpg','assets/images/hero/hanka.jpg'];
   let renderer, scene, camera, uniforms;
   try{ renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false }); }catch(e){ return; }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
