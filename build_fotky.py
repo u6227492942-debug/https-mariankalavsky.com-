@@ -3,9 +3,15 @@
 Regeneruje sekciu Fotky v index.html z priečinkovej štruktúry v assets/images/fotky/.
 
 Ako to funguje:
-  - jeden priečinok pod fotky/ = jedna kategória (napr. fotky/portrety/, fotky/krajiny/)
-  - reportaz/ je špeciálne: každý podpriečinok je pomenovaná akcia (vlastná galéria + URL)
-      napr. fotky/reportaz/house-of-kondor/
+  - jeden priečinok pod fotky/ = jedna kategória (napr. fotky/ludia/, fotky/krajiny/)
+  - reportaz/ je špeciálne (CHOOSER): každý podpriečinok je samostatná akcia
+      s vlastnou galériou + URL, napr. fotky/reportaz/house-of-kondor/
+  - v OSTATNÝCH kategóriách sú podpriečinky SÉRIE: každý podpriečinok sa
+      vyrenderuje ako jeden súvislý blok (fotky série idú za sebou, nemiešajú sa).
+      Poradie sérií = podľa názvu priečinka ZOSTUPNE (najnovšie hore), takže
+      priečinky pomenuj napr. datumom alebo cislom:  2025-06-more, 2024-11-les ...
+      alebo 03-..., 02-..., 01-...  (vyššie = novšie = vyššie na stránke).
+      Voľné fotky priamo v kategórii (mimo série) idú ako jeden blok na koniec.
   - technika (štítok digital/analóg v lightboxe) sa berie z množiny DIGITAL nižšie
       (podľa názvu súboru); čo tam nie je = analóg.
 
@@ -30,6 +36,9 @@ LABELS = {
     'house-of-kondor': ('House of Kondor', 'House of Kondor'),
 }
 ORDER = ['ludia', 'reportaz', 'nocna-obloha', 'experimenty', 'krajiny', 'zvierata', 'ostatne']
+
+# Kategórie, kde podpriečinky = samostatné galérie (vlastná URL), nie série-bloky.
+CHOOSER = {'reportaz'}
 
 # Digitálne fotky (podľa názvu súboru). Čo tu nie je, sa označí ako "analóg".
 DIGITAL = set("""
@@ -80,6 +89,20 @@ def wall(folder, files):
     return '<div class="wall">\n' + figs + '\n  </div>'
 
 
+def blocks(cdir):
+    """Obsah leaf kategórie ako súvislé bloky:
+       najprv série (podpriečinky, ZOSTUPNE = najnovšie hore), potom voľné fotky."""
+    out = []
+    for series in sorted(subdirs(cdir), reverse=True):
+        simgs = images_in(os.path.join(cdir, series))
+        if simgs:
+            out.append(wall(os.path.join(cdir, series), simgs))
+    loose = images_in(cdir)
+    if loose:
+        out.append(wall(cdir, loose))
+    return '\n    '.join(out) if out else '<div class="wall"></div>'
+
+
 def build():
     cats = subdirs(FOTKY)
     cats = [c for c in ORDER if c in cats] + [c for c in cats if c not in ORDER]
@@ -88,12 +111,10 @@ def build():
     for c in cats:
         cdir = os.path.join(FOTKY, c)
         sk, en = label(c)
-        imgs = images_in(cdir)
-        events = subdirs(cdir)
-        if events and not imgs:
-            # chooser: podpriečinky sú akcie
+        if c in CHOOSER:
+            # chooser: podpriečinky sú samostatné akcie (vlastná URL)
             children = []
-            for ev in events:
+            for ev in subdirs(cdir):
                 evdir = os.path.join(cdir, ev)
                 evimgs = images_in(evdir)
                 if not evimgs:
@@ -104,9 +125,10 @@ def build():
                 sections.append(f'  <!-- Fotky / {sk} / {esk} -->\n  <section class="leaf" id="{lid}">{wall(evdir, evimgs)}</section>\n')
             root_nodes.append(f"{{slug:{js(c)}, label:{{sk:{js(sk)},en:{js(en)}}}, children:[\n      " + ',\n      '.join(children) + "\n    ]}")
         else:
+            # leaf: voľné fotky + série-bloky (podpriečinky) v jednej galérii
             lid = 'fotky-' + c
             root_nodes.append(f"{{slug:{js(c)}, label:{{sk:{js(sk)},en:{js(en)}}}, leaf:{js(lid)}}}")
-            sections.append(f'  <!-- Fotky / {sk} -->\n  <section class="leaf" id="{lid}">{wall(cdir, imgs)}</section>\n')
+            sections.append(f'  <!-- Fotky / {sk} -->\n  <section class="leaf" id="{lid}">{blocks(cdir)}</section>\n')
 
     h = open(IDX, encoding='utf-8').read()
 
@@ -122,16 +144,22 @@ def build():
     h = h[:ss] + '\n'.join(sections) + '\n' + h[se:]
 
     open(IDX, 'w', encoding='utf-8', newline='').write(h)
-    tot = sum(len(images_in(os.path.join(FOTKY, c))) or sum(len(images_in(os.path.join(FOTKY, c, e))) for e in subdirs(os.path.join(FOTKY, c))) for c in cats)
+
+    def count(cdir):
+        return len(images_in(cdir)) + sum(len(images_in(os.path.join(cdir, e))) for e in subdirs(cdir))
+
+    tot = sum(count(os.path.join(FOTKY, c)) for c in cats)
     print('Rebuilt Fotky:', len(cats), 'categories,', tot, 'photos')
     for c in cats:
         cdir = os.path.join(FOTKY, c)
-        n = len(images_in(cdir))
-        if n:
-            print(f'  {c}: {n}')
+        loose = len(images_in(cdir))
+        subs = subdirs(cdir)
+        if subs:
+            print(f'  {c}: {count(cdir)}  (voľné {loose}' + ('' if c in CHOOSER else ', série:') + ')')
+            for e in sorted(subs, reverse=(c not in CHOOSER)):
+                print(f'    {c}/{e}: {len(images_in(os.path.join(cdir, e)))}')
         else:
-            for e in subdirs(cdir):
-                print(f'  {c}/{e}: {len(images_in(os.path.join(cdir, e)))}')
+            print(f'  {c}: {loose}')
 
 
 if __name__ == '__main__':
