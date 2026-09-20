@@ -201,6 +201,7 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 
 /* photo wall: thin-gap 3-column masonry (like igorsmitka.com), darken on hover, click to open */
 .wall{display:flex;align-items:flex-start;gap:10px;width:100%;}
+.wall + .wall{margin-top:64px;}
 .wall .col{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;}
 .wall figure{margin:0;position:relative;overflow:hidden;background:var(--paper-2);cursor:zoom-in;}
 .wall figure img{width:100%;display:block;transition:filter .25s ease-in-out;}
