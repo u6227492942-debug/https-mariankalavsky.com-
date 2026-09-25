@@ -201,7 +201,8 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
 
 /* photo wall: thin-gap 3-column masonry (like igorsmitka.com), darken on hover, click to open */
 .wall{display:flex;align-items:flex-start;gap:10px;width:100%;}
-.wall + .wall{margin-top:64px;}
+.series + .series{margin-top:clamp(48px,7vw,84px);}
+.series-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey-2);margin:0 0 clamp(16px,2vw,26px);padding-bottom:10px;border-bottom:1px solid var(--hair);}
 .wall .col{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;}
 .wall figure{margin:0;position:relative;overflow:hidden;background:var(--paper-2);cursor:zoom-in;}
 .wall figure img{width:100%;display:block;transition:filter .25s ease-in-out;}
@@ -328,12 +329,14 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
   <div id="stage-nav"><ul class="cat-list" id="cat-list"></ul></div>
 
   <!-- Fotky / Ľudia -->
-  <section class="leaf" id="fotky-ludia"><div class="wall">
+  <section class="leaf" id="fotky-ludia"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/ludia/3-digital/DSC_0086.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/ludia/3-digital/DSC_0097.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/ludia/3-digital/DSC_0121.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/ludia/3-digital/DSC_0297.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog color</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/ludia/2-film-farebny/Andrej.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/2-film-farebny/adam.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
@@ -355,7 +358,8 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
     <figure><img src="assets/images/fotky/ludia/2-film-farebny/zayo.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/2-film-farebny/ziska.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/2-film-farebny/zuzka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog BW</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/ludia/1-film-bw/GIRL.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/1-film-bw/Karla.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
@@ -387,7 +391,7 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
     <figure><img src="assets/images/fotky/ludia/1-film-bw/veroveru.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/1-film-bw/vm.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/ludia/1-film-bw/šajmo.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Fotky / Reportáž / House of Kondor -->
   <section class="leaf" id="fotky-house-of-kondor"><div class="wall">
@@ -427,55 +431,65 @@ body.stage-open #stage{opacity:1;visibility:visible;transform:none;}
   </div></section>
 
   <!-- Fotky / Nočná obloha -->
-  <section class="leaf" id="fotky-nocna-obloha"><div class="wall">
+  <section class="leaf" id="fotky-nocna-obloha"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/nocna-obloha/3-digital/DSC_0535.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/nocna-obloha/3-digital/DSC_0541.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/nocna-obloha/3-digital/huliedit.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/nocna-obloha/3-digital/hviezdy.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Fotky / Experimenty -->
-  <section class="leaf" id="fotky-experimenty"><div class="wall">
+  <section class="leaf" id="fotky-experimenty"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/experimenty/3-digital/derealizácia.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/experimenty/3-digital/foto-syntéza.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/experimenty/3-digital/relax.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog color</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/experimenty/2-film-farebny/prilis vela ruk na objatie.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Fotky / Krajiny -->
-  <section class="leaf" id="fotky-krajiny"><div class="wall">
+  <section class="leaf" id="fotky-krajiny"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/krajiny/3-digital/huliwow.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog color</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/krajiny/2-film-farebny/Líščia Maringotka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/krajiny/2-film-farebny/cmiter.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/krajiny/2-film-farebny/dvor.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/krajiny/2-film-farebny/farma.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog BW</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/krajiny/1-film-bw/jazero.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
     <figure><img src="assets/images/fotky/krajiny/1-film-bw/rybárka.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Fotky / Zvieratá -->
-  <section class="leaf" id="fotky-zvierata"><div class="wall">
+  <section class="leaf" id="fotky-zvierata"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/zvierata/3-digital/DSC_0359.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/zvierata/3-digital/DSC_0450.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Fotky / Ostatné -->
-  <section class="leaf" id="fotky-ostatne"><div class="wall">
+  <section class="leaf" id="fotky-ostatne"><div class="series"><div class="series-label">digital</div>
+    <div class="wall">
     <figure><img src="assets/images/fotky/ostatne/3-digital/mlaka.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
     <figure><img src="assets/images/fotky/ostatne/3-digital/vyklad.jpg" alt="foto" loading="lazy" data-tech="digital"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog color</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/ostatne/2-film-farebny/kos.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div>
+  </div></div>
+    <div class="series"><div class="series-label">analog BW</div>
     <div class="wall">
     <figure><img src="assets/images/fotky/ostatne/1-film-bw/POLIZEI.jpg" alt="foto" loading="lazy" data-tech="analog"></figure>
-  </div></section>
+  </div></div></section>
 
   <!-- Video / Klipy -->
   <section class="leaf" id="video-klip"><div class="stack">
