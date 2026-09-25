@@ -89,17 +89,37 @@ def wall(folder, files):
     return '<div class="wall">\n' + figs + '\n  </div>'
 
 
+# Popisok nad sériou (podľa názvu podpriečinka bez čísla-prefixu). Neznáme = odvodí sa.
+SERIES_LABELS = {
+    'digital': 'digital',
+    'film-farebny': 'analog color',
+    'film-bw': 'analog BW',
+}
+
+
+def series_name(slug):
+    key = slug.split('-', 1)[1] if slug[:1].isdigit() and '-' in slug else slug
+    if key in SERIES_LABELS:
+        return SERIES_LABELS[key]
+    return key.replace('-', ' ').replace('_', ' ').strip()
+
+
+def block(name, folder, files):
+    lbl = f'<div class="series-label">{name}</div>\n    ' if name else ''
+    return f'<div class="series">{lbl}{wall(folder, files)}</div>'
+
+
 def blocks(cdir):
-    """Obsah leaf kategórie ako súvislé bloky:
+    """Obsah leaf kategórie ako súvislé bloky s nadpisom:
        najprv série (podpriečinky, ZOSTUPNE = najnovšie hore), potom voľné fotky."""
     out = []
     for series in sorted(subdirs(cdir), reverse=True):
         simgs = images_in(os.path.join(cdir, series))
         if simgs:
-            out.append(wall(os.path.join(cdir, series), simgs))
+            out.append(block(series_name(series), os.path.join(cdir, series), simgs))
     loose = images_in(cdir)
     if loose:
-        out.append(wall(cdir, loose))
+        out.append(block('', cdir, loose))
     return '\n    '.join(out) if out else '<div class="wall"></div>'
 
 
