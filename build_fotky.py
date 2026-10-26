@@ -78,14 +78,25 @@ def subdirs(folder):
     return [d for d in sorted(os.listdir(folder)) if os.path.isdir(os.path.join(folder, d))]
 
 
-def figure(folder, fname):
-    tech = 'digital' if fname in DIGITAL else 'analog'
+def tech_for(series_slug, fname):
+    """Technika (digital/analog) pre lightbox. Prednosť má série-priečinok,
+       inak (reportáže, voľné fotky) fallback na zoznam DIGITAL + heuristiku DSC_."""
+    s = (series_slug or '').lower()
+    if 'digital' in s:
+        return 'digital'
+    if 'film' in s or 'bw' in s or 'analog' in s or 'analóg' in s:
+        return 'analog'
+    return 'digital' if (fname in DIGITAL or fname.upper().startswith('DSC_')) else 'analog'
+
+
+def figure(folder, fname, series_slug=''):
+    tech = tech_for(series_slug, fname)
     src = relurl(os.path.join(folder, fname))
     return f'    <figure><img src="{src}" alt="foto" loading="lazy" data-tech="{tech}"></figure>'
 
 
-def wall(folder, files):
-    figs = '\n'.join(figure(folder, f) for f in files)
+def wall(folder, files, series_slug=''):
+    figs = '\n'.join(figure(folder, f, series_slug) for f in files)
     return '<div class="wall">\n' + figs + '\n  </div>'
 
 
@@ -104,9 +115,9 @@ def series_name(slug):
     return key.replace('-', ' ').replace('_', ' ').strip()
 
 
-def block(name, folder, files):
+def block(name, folder, files, series_slug=''):
     lbl = f'<div class="series-label">{name}</div>\n    ' if name else ''
-    return f'<div class="series">{lbl}{wall(folder, files)}</div>'
+    return f'<div class="series">{lbl}{wall(folder, files, series_slug)}</div>'
 
 
 def blocks(cdir):
@@ -116,7 +127,7 @@ def blocks(cdir):
     for series in sorted(subdirs(cdir), reverse=True):
         simgs = images_in(os.path.join(cdir, series))
         if simgs:
-            out.append(block(series_name(series), os.path.join(cdir, series), simgs))
+            out.append(block(series_name(series), os.path.join(cdir, series), simgs, series))
     loose = images_in(cdir)
     if loose:
         out.append(block('', cdir, loose))
@@ -142,7 +153,7 @@ def build():
                 esk, een = label(ev)
                 lid = 'fotky-' + ev
                 children.append(f"{{slug:{js(ev)}, label:{{sk:{js(esk)},en:{js(een)}}}, leaf:{js(lid)}}}")
-                sections.append(f'  <!-- Fotky / {sk} / {esk} -->\n  <section class="leaf" id="{lid}">{wall(evdir, evimgs)}</section>\n')
+                sections.append(f'  <!-- Fotky / {sk} / {esk} -->\n  <section class="leaf" id="{lid}">{wall(evdir, evimgs, ev)}</section>\n')
             root_nodes.append(f"{{slug:{js(c)}, label:{{sk:{js(sk)},en:{js(en)}}}, children:[\n      " + ',\n      '.join(children) + "\n    ]}")
         else:
             # leaf: voľné fotky + série-bloky (podpriečinky) v jednej galérii
